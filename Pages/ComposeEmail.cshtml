@@ -5,31 +5,55 @@
     var receiver = Request.Query["Receiver"];
     var subject = Request.Query["Subject"];
 }
-<h3>@ViewData["Title"]</h3>
 
-<form method="post">
-    <div class="form-group">
-        <label for="EmailSubject">Subject</label>
-        <input type="text" class="form-control" id="EmailSubject" name="EmailSubject" value="@subject" required />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h3 class="text-center mb-4">@ViewData["Title"]</h3>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post" class="bg-light p-4 rounded shadow-sm">
+                    <div class="form-group mb-3">
+                        <label for="EmailSubject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="EmailSubject" name="EmailSubject" value="@subject" required />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="EmailMessage" class="form-label">Message</label>
+                        <textarea class="form-control" id="EmailMessage" name="EmailMessage" rows="6" required>@Model.EmailMessage</textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="EmailReceiver" class="form-label">Receiver</label>
+                        <input type="text" class="form-control" id="EmailReceiver" name="EmailReceiver" value="@receiver" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-dark w-100">Send Email</button>
+
+                    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                    {
+                        <div class="alert alert-success mt-3">@Model.SuccessMessage</div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger mt-3">@Model.ErrorMessage</div>
+                    }
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="EmailMessage">Message</label>
-        <textarea class="form-control" id="EmailMessage" name="EmailMessage" required>@Model.EmailMessage</textarea>
-    </div>
-    <div class="form-group">
-        <label for="EmailReceiver">Receiver</label>
-        <input type="text" class="form-control" id="EmailReceiver" name="EmailReceiver" value="@receiver" required />
-    </div>
 
-    <button type="submit" class="btn btn-primary">Send Email</button>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
-    {
-        <div class="alert alert-success mt-3">@Model.SuccessMessage</div>
-    }
-
-    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-    {
-        <div class="alert alert-danger mt-3">@Model.ErrorMessage</div>
-    }
-</form>
+</body>
+</html>

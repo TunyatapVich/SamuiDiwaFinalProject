@@ -18,26 +18,26 @@
             <table class="table table-bordered table-hover align-middle">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">Read Status</th>
+                        <th scope="col" class="text-center">Read Status</th>
                         <th scope="col">Sent Date</th>
                         <th scope="col">Sender Name</th>
                         <th scope="col">Email Subject</th>
                         <th scope="col">Message Preview</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col" class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var email in Model.listEmails)
                     {
                         <tr>
-                            <td>
+                            <td class="text-center">
                                 @if (email.EmailIsRead == "False")
                                 {
-                                    <span class="badge bg-primary">Unread</span>
+                                    <span class="badge bg-primary p-2">Unread</span>
                                 }
                                 else
                                 {
-                                    <span class="badge bg-secondary">Read</span>
+                                    <span class="badge bg-secondary p-2">Read</span>
                                 }
                             </td>
                             <td>@email.EmailDate</td>
@@ -50,7 +50,7 @@
                             <td>
                                 @email.EmailMessage.Substring(0, Math.Min(50, email.EmailMessage.Length))...
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <a class="btn btn-danger btn-sm" href="/DeleteEmail?emailid=@email.EmailID">
                                     Delete
                                 </a>
