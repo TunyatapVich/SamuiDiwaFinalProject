@@ -22,7 +22,7 @@ namespace FinalProject.Pages
         {
             try
             {
-                String connectionString = "Server=tcp:buem.database.windows.net,1433;Initial Catalog=buem;Persist Security Info=False;User ID=[USERNAME];Password=[PASSWORD];MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                String connectionString = "Server=tcp:samuidiwafinalproject.database.windows.net,1433;Initial Catalog=samuidiwafinalproject;Persist Security Info=False;User ID=amissyzx;Password=thep1234!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -36,7 +36,7 @@ namespace FinalProject.Pages
                         username = User.Identity.Name;
                     }
 
-                    String sql = "SELECT * FROM emails WHERE emailreceiver='"+username+"'";
+                    String sql = "SELECT * FROM Email WHERE emailreceiver='"+username+"'";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -48,7 +48,7 @@ namespace FinalProject.Pages
                                 emailInfo.EmailSubject = reader.GetString(1);
                                 emailInfo.EmailMessage = reader.GetString(2);
                                 emailInfo.EmailDate = reader.GetDateTime(3).ToString();
-                                emailInfo.EmailIsRead = "" + reader.GetInt32(4);
+                                emailInfo.EmailIsRead = "" + reader.GetBoolean(4);
                                 emailInfo.EmailSender = reader.GetString(5);
                                 emailInfo.EmailReceiver = reader.GetString(6);
 

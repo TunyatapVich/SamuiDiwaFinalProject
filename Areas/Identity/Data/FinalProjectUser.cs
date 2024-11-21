@@ -12,6 +12,7 @@ public class FinalProjectUser : IdentityUser
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string MobilePhone { get; set; }
+    public string Department { get; set; }
 
 }
 

@@ -56,25 +56,44 @@ namespace FinalProject.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(255, ErrorMessage = "The First Name must be in between 1 to 255.", MinimumLength = 1)]
+            [StringLength(255, ErrorMessage = "The First Name must be between 1 to 255.", MinimumLength = 1)]
+            [RegularExpression(@"^[^\d]+$", ErrorMessage = "The First Name cannot contain any numbers.")]
             public string FirstName { get; set; }
 
             [Required]
-            [StringLength(255, ErrorMessage = "The Last Name must be in between 1 to 255.", MinimumLength = 1)]
+            [StringLength(255, ErrorMessage = "The Last Name must be between 1 to 255.", MinimumLength = 1)]
+            [RegularExpression(@"^[^\d]+$", ErrorMessage = "The Last Name cannot contain any numbers.")]
             public string LastName { get; set; }
 
+
             [Required]
-            [StringLength(15, ErrorMessage = "The Mobile Phone must be in between 7 to 15.", MinimumLength = 7)]
+            [StringLength(15, ErrorMessage = "The Mobile Phone must be between 7 to 15 characters.", MinimumLength = 7)]
+            [RegularExpression(@"^(\d{7,15}|\d{3}-\d{4,12})$", ErrorMessage = "The Mobile Phone must be in the format 'xxxxxxxxx' or 'xxx-xxxxxxx'.")]
             public string MobilePhone { get; set; }
+
+
 
             [Required]
             [StringLength(255, ErrorMessage = "The Username must be between 1 to 255.", MinimumLength = 1)]
+            [RegularExpression(@"^(?!\d+$)\S+$", ErrorMessage = "The Username cannot contain numbers only or any whitespace.")]
             public string UserName { get; set; }
+
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [RegularExpression(@"^\S+$", ErrorMessage = "The Password cannot contain any whitespace.")]
             public string Password { get; set; }
+
+
+            [Required]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [DataType(DataType.Password)]
+            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            public string ConfirmPassword { get; set; }
+
+            [Required]
+            public string Department { get; set; }
         }
 
 
@@ -95,6 +114,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.MobilePhone = Input.MobilePhone;
+                user.Department = Input.Department;
 
                 await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.UserName, CancellationToken.None);
