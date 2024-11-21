@@ -1,72 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@401&display=swap');
 
-html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
 body {
-    margin-bottom: 60px;
-    background-color: white;
-    color: black; /* Set color to black for visibility */
     font-family: 'Manrope', sans-serif;
     font-weight: 400;
     font-style: normal;
 }
-
-h1 {
-    font-weight: 800; /* Extra bold */
-}
-
-p {
-    font-weight: 400; /* Regular */
-
-    color: white;
-}
-
-th {
-    color: Black;
-}
-
-td {
-    color: Black;
-}
-
-.button-container {
-    display: flex;
-    justify-content: space-between;
-    position: sticky;
-    bottom: 0;
-    z-index: 1;
-    background-color: #e0e0e0;
-    padding: 18px 0;
-    width: 100%;
-    gap: 10px;
-    margin-top: 10px;
-    max-height: calc(100vh - 80px);
-    padding-bottom: 10px;
-}
-
-    .button-container .btn {
-        width: 50%;
-    }
-
-.form-label {
-    color: black;
-}
-
-.scrollable-content {
-    overflow-y: scroll;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    padding: 10px;
-}
-
-    .scrollable-content::-webkit-scrollbar {
-        display: none; /* Safari and Chrome */
-    }

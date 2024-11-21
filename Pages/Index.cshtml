@@ -4,50 +4,61 @@
     ViewData["Title"] = "Email Inbox";
 }
 
-<h2>All Inbox</h2>
-@if (Model.listEmails.Count == 0)
-{
-    <p>No emails found for the current user.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Read Status</th>
-                <th>Sent Date</th>
-                <th>Sender Name</th>
-                <th>Email Subject</th>
-                <th>Message Preview</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var email in Model.listEmails)
-            {
-                <tr>
-                    <td>
-                        @if (email.EmailIsRead == "False")
-                        {
-                            <span class="badge bg-primary">Unread</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-secondary">Read</span>
-                        }
-                    </td>
-                    <td>@email.EmailDate</td>
-                    <td>@email.EmailSender</td>
-                    <td>
-                        <a href="/ReadEmail?emailid=@email.EmailID">@email.EmailSubject</a>
-                    </td>
-                    <td>@email.EmailMessage.Substring(0, Math.Min(50, email.EmailMessage.Length))...</td>
-                    <td>
-                        <a class="btn btn-danger btn-sm" href="/DeleteEmail?emailid=@email.EmailID">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">@ViewData["Title"]</h2>
+    @if (Model.listEmails.Count == 0)
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            No emails found for the current user.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Read Status</th>
+                        <th scope="col">Sent Date</th>
+                        <th scope="col">Sender Name</th>
+                        <th scope="col">Email Subject</th>
+                        <th scope="col">Message Preview</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var email in Model.listEmails)
+                    {
+                        <tr>
+                            <td>
+                                @if (email.EmailIsRead == "False")
+                                {
+                                    <span class="badge bg-primary">Unread</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Read</span>
+                                }
+                            </td>
+                            <td>@email.EmailDate</td>
+                            <td>@email.EmailSender</td>
+                            <td>
+                                <a href="/ReadEmail?emailid=@email.EmailID" class="text-decoration-none text-primary">
+                                    @email.EmailSubject
+                                </a>
+                            </td>
+                            <td>
+                                @email.EmailMessage.Substring(0, Math.Min(50, email.EmailMessage.Length))...
+                            </td>
+                            <td>
+                                <a class="btn btn-danger btn-sm" href="/DeleteEmail?emailid=@email.EmailID">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
